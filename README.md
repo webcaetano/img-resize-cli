@@ -62,7 +62,7 @@ Examples
 </tr>
 <tr>
 <td><code>algo</code></td>
-<td>resize algorithm, default: bilinear<br>
+<td>resize algorithm<br>
 algorithms: bilinear | neighbor | bicubic | hermite | bezier</td>
 <td><code>bilinear</code></td>
 </tr>
