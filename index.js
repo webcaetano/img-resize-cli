@@ -9,7 +9,19 @@ var _ = require('lodash');
 
 // insert defaults here
 var defaults = {
-	porcent:75
+	porcent:75,
+	width:null,
+	height:null,
+	algo:'bilinear',
+}
+
+
+var algorithms = {
+	'bilinear':Jimp.RESIZE_BILINEAR,
+	'neighbor':Jimp.RESIZE_NEAREST_NEIGHBOR,
+	'bicubic':Jimp.RESIZE_BICUBIC,
+	'hermite':Jimp.RESIZE_HERMITE,
+	'bezier':Jimp.RESIZE_BEZIER,
 }
 
 var self = function(src, dest, options, done){
@@ -18,6 +30,7 @@ var self = function(src, dest, options, done){
 		options = done ? done : {};
 		done = tmpVar;
 	}
+
 	options = _.extend({},defaults,options);
 
 	async.auto({
@@ -58,10 +71,43 @@ var self = function(src, dest, options, done){
 
 				run.push(function(callback){
 					var image = imageFile.image;
-					var por = options.porcent/100; // porcent
+					var width;
+					var height;
+					var size = {
+						width:null,
+						height:null,
+					}
+
+					if(options.width || options.height){
+						_.each(['width','height'],function(dimension){
+							if(options[dimension]=='auto'){
+								size[dimension] = Jimp.AUTO;
+							} else if(typeof options[dimension]==='string' && options[dimension].match(/%/g).length){
+								var por = Number(options[dimension].replace(/%/g,''))/100;
+								size[dimension] = Math.floor(image.bitmap[dimension]*por);
+							} else if(!options[dimension]) {
+								size[dimension] = image.bitmap[dimension];
+							} else {
+								size[dimension] = Number(options[dimension]);
+							}
+						});
+					} else {
+						// porcent
+						if(typeof options.porcent=='string'){
+							var porcent = Number(options.porcent.replace(/%/g,''));
+						} else {
+							var porcent = options.porcent;
+						}
+
+						var por = porcent/100; // porcent
+						size.width = Math.floor(image.bitmap.width*por);
+						size.height = Math.floor(image.bitmap.height*por);
+					}
+
 
 					image
-					.resize(Math.floor(image.bitmap.width*por),Math.floor(image.bitmap.height*por))
+					.resize(size.width,size.height,algorithms[options.algo])
+					// .resize(size.width,size.height)
 					.write(newName,callback);
 				})
 			})

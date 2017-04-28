@@ -6,7 +6,7 @@
   "author": "Andre Caetano",
   "license": "MIT",
   "bin": {
-    "rpad": "cli.js"
+    "rsize": "cli.js"
   },
   "scripts": {
     "test": "ava"
@@ -16,13 +16,14 @@
     "cp-file": "^4.1.1",
     "glob": "^7.1.1",
     "jimp": "^0.2.27",
-    "mkdirp": "^0.5.1",
     "lodash": "^4.17.4",
-    "meow": "^3.7.0"
+    "meow": "^3.7.0",
+    "mkdirp": "^0.5.1"
   },
   "devDependencies": {
     "ava": "^0.18.2",
-    "del": "^2.2.2"
+    "del": "^2.2.2",
+    "image-size": "^0.5.1"
   },
   "keywords": [
     "cli-app",
