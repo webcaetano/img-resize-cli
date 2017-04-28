@@ -61,7 +61,23 @@ var self = function(src, dest, options, done){
 
 			async.parallel(run,callback);
 		}],
-		resize:['images','mkdir',function(results,callback){
+		folders:['files',function(results,callback){
+			var run = [];
+			var folders = _.uniq(_.map(results.files,function(file){
+				return path.dirname(file);
+			}));
+
+			var destFolder = dest ? dest : '';
+
+			_.each(folders,function(folder){
+				run.push(function(callback){
+					mkdirp(path.join(destFolder,folder),callback);
+				})
+			})
+
+			async.parallel(run,callback);
+		}],
+		resize:['images','mkdir','folders',function(results,callback){
 			var run = [];
 
 			_.each(results.images,function(imageFile){
@@ -69,7 +85,7 @@ var self = function(src, dest, options, done){
 
 				if(dest){
 					var newName = path.format({
-						dir:dest,
+						dir:dest+'/'+data.dir,
 						name:data.name,
 						ext:data.ext,
 					});
@@ -111,7 +127,6 @@ var self = function(src, dest, options, done){
 						size.width = Math.floor(image.bitmap.width*por);
 						size.height = Math.floor(image.bitmap.height*por);
 					}
-
 
 					image
 					.resize(size.width,size.height,algorithms[options.algo])

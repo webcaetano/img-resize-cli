@@ -6,7 +6,7 @@ var self = require('./');
 
 var cli = meow([
 	'Usage',
-		'$ rsize <glob>',
+		'$ rsize <src> <dest (optional)>',
 	'',
 	'Options',
 		'--porcent image porcentage resize',
