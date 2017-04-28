@@ -206,3 +206,29 @@ test.cb('should resize image with percent option as string without %',function(t
 	})
 });
 
+test.cb('should resize image with percent and algo',function(t){
+	var src = './test/wizz/*.png';
+	var dest = './test/dist/test9'
+	var inputFiles = glob.sync(src);
+	var numOfInput = inputFiles.length;
+	var inputImageSize = sizeOf(inputFiles[0]);
+
+	del.sync(dest);
+
+	self(src,dest,{
+		porcent:'50%',
+		algo:'bicubic',
+	},function(err,data){
+		var outputFiles = glob.sync(dest+'/*');
+		var numOutput = outputFiles.length;
+		var outputImageSize = sizeOf(outputFiles[0]);
+
+		t.falsy(err);
+		t.truthy(numOutput==numOfInput);
+		t.truthy(outputImageSize.width==Math.floor(inputImageSize.width*(50/100)));
+		t.truthy(outputImageSize.height==Math.floor(inputImageSize.height*(50/100)));
+		t.pass();
+		t.end();
+	})
+});
+
