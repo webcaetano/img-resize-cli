@@ -38,7 +38,11 @@ var self = function(src, dest, options, done){
 			glob(src,{nodir:true},callback);
 		},
 		mkdir:function(callback){
-			mkdirp(dest,callback);
+			if(dest){
+				mkdirp(dest,callback);
+			} else {
+				callback();
+			}
 		},
 		images:['files',function(results,callback){
 			var run = [];
@@ -63,11 +67,15 @@ var self = function(src, dest, options, done){
 			_.each(results.images,function(imageFile){
 				var data = path.parse(imageFile.file);
 
-				var newName = path.format({
-					dir:dest,
-					name:data.name,
-					ext:data.ext,
-				});
+				if(dest){
+					var newName = path.format({
+						dir:dest,
+						name:data.name,
+						ext:data.ext,
+					});
+				} else {
+					var newName = imageFile.file
+				}
 
 				run.push(function(callback){
 					var image = imageFile.image;
@@ -107,7 +115,6 @@ var self = function(src, dest, options, done){
 
 					image
 					.resize(size.width,size.height,algorithms[options.algo])
-					// .resize(size.width,size.height)
 					.write(newName,callback);
 				})
 			})
