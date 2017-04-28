@@ -1,6 +1,6 @@
 {
   "name": "img-resize-cli",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Image resize cli using jimp",
   "main": "index.js",
   "author": "Andre Caetano",
