@@ -13,13 +13,16 @@
   },
   "dependencies": {
     "async": "^2.1.2",
+    "cp-file": "^4.1.1",
     "glob": "^7.1.1",
-    "lodash": "^4.13.1",
-    "meow": "^3.7.0",
+    "jimp": "^0.2.27",
+    "mkdirp": "^0.5.1",
+    "lodash": "^4.17.4",
+    "meow": "^3.7.0"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
-    "del": "^2.2.2",
+    "ava": "^0.18.2",
+    "del": "^2.2.2"
   },
   "keywords": [
     "cli-app",
@@ -27,7 +30,7 @@
     "image",
     "img",
     "resize",
-    "glob",
+    "glob"
   ],
   "repository": {
     "type": "git",

@@ -5,3 +5,4 @@ tmp/
 test.js
 test/
 .travis.yml
+npm-debug.log
