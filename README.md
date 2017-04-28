@@ -4,7 +4,7 @@
 [![Build status][travis-image]][travis-url]
 <!-- [![Test coverage][coveralls-image]][coveralls-url] -->
 
-> Rename files with pads splited on folders
+> Image resize cli using jimp
 
 ## Installation
 
