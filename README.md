@@ -1,4 +1,4 @@
-# pad-rename
+# img-resize-cli
 
 [![NPM version][npm-image]][npm-url]
 [![Build status][travis-image]][travis-url]
@@ -9,49 +9,46 @@
 ## Installation
 
 ```
-npm install pad-rename --save
+npm install img-resize-cli --save
 ```
 
 ## Usage
 
 ```
-rpad(glob,options,callback)
+rsize(src,dest,options)
 ```
 
 ## Example 
 
 ```javascript
-var rpad = require('pad-rename');
+var rsize = require('img-resize-cli');
 
-
-rpad('**/*.png',function(){
-
-});
-
-// or
-rpad(['**/*.png'],{start:0},function(){
+// width porcent
+rsize(src,dest,{
+	porcent:'50%'
+},function(err,data){
 
 });
 
-// or
-rpad(['**/*.png'],function(){
+// width dimensions
+rsize(src,dest,{
+	width:100,
+	height:100, 
+},function(err,data){
 
-},{start:0});
+});
 
-// with all options
-rpad(['**/*.png'],function(err,data){
+// full options 
+rsize(src,dest,{
+	width:'50%',
+	height:'auto', 
+	alog:'bicubic', 
+},function(err,data){
 
-},{
-	prefix:'lulu_',
-	sufix:'_purple',
-	start:0,
-	length:5,
-	val:'o',
 });
 ```
 
 ## Options
-
 
 <table>
 <tr>
@@ -60,29 +57,25 @@ rpad(['**/*.png'],function(err,data){
 <td><strong>Default</strong></td>
 </tr>
 <tr>
-<td><code>start</code></td>
-<td>The inital pad start.</td>
-<td><code>1</code></td>
+<td><code>porcent</code></td>
+<td>Image porcentage resize</td>
+<td><code>75</code></td>
 </tr>
 <tr>
-<td><code>length</code></td>
-<td>The padding length.</td>
-<td><code>3</code></td>
+<td><code>width</code></td>
+<td>new image width, (numbers or auto)</td>
+<td><code>null</code></td>
 </tr>
 <tr>
-<td><code>val</code></td>
-<td>The string used as padding.</td>
-<td><code>0</code></td>
+<td><code>height</code></td>
+<td>new image height, (numbers or auto)</td>
+<td><code>null</code></td>
 </tr>
 <tr>
-<td><code>sufix</code></td>
-<td>The string used as sufix.</td>
-<td><code>""</code></td>
-</tr>
-<tr>
-<td><code>prefix</code></td>
-<td>The string used as prefix.</td>
-<td><code>""</code></td>
+<td><code>algo</code></td>
+<td>resize algorithm, default: bilinear<br>
+algorithms: bilinear | neighbor | bicubic | hermite | bezier</td>
+<td><code>bilinear</code></td>
 </tr>
 </table>
 
@@ -90,34 +83,33 @@ rpad(['**/*.png'],function(err,data){
 ## CLI
 
 ```
-npm install pad-rename -g
+npm install img-resize-cli -g
 ```
 
 ```
 Usage
-	$ rpad <glob>
+	$ rsize <glob>
 
 Options
-	--start inital pad start. Default: 1
-	--length the padding length. Default: 3
-	--val string used as padding. Default: "0"
-	--prefix string used as prefix. Default: ""
-	--sufix string used as sufix. Default: ""
+	--porcent image porcentage resize
+	--width new image width, (numbers or auto)
+	--height new image height, (numbers or auto)
+	--algo resize algorithm, default: bilinear
+	algorithms: bilinear | neighbor | bicubic | hermite | bezier
 
 Examples
-	rpad "**/*.png"
-	rpad "**/*.png" --start 0 --length 5 --val "0" --prefix "img_" --sufix "_end"
+	rsize "**/*.png" "destFolder/" --porcent 50
+	rsize "**/*.png" "destFolder/" --width 100
+	rsize "**/*.png" "destFolder/" --width 100 --height 100
+	rsize "**/*.png" "destFolder/" --width 100 --height auto
+	rsize "**/*.png" "destFolder/" --porcent 25 --algo bicubic
 ```
-
 
 ## License
 
 MIT
 
-[npm-image]: https://img.shields.io/npm/v/pad-rename.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/pad-rename
-[travis-image]: https://img.shields.io/travis/webcaetano/pad-rename.svg?style=flat-square
-[travis-url]: https://travis-ci.org/webcaetano/pad-rename
-<!-- [coveralls-image]: https://img.shields.io/coveralls/blakeembrey/pad-rename.svg?style=flat 
-[coveralls-url]: https://coveralls.io/r/blakeembrey/pad-rename?branch=master
--->
+[npm-image]: https://img.shields.io/npm/v/img-resize-cli.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/img-resize-cli
+[travis-image]: https://img.shields.io/travis/webcaetano/img-resize-cli.svg?style=flat-square
+[travis-url]: https://travis-ci.org/webcaetano/img-resize-cli
