@@ -12,40 +12,29 @@
 npm install img-resize-cli --save
 ```
 
-## Usage
+## CLI
 
 ```
-rsize(src,dest,options)
+npm install img-resize-cli -g
 ```
 
-## Example 
+```
+Usage
+	$ rsize <glob>
 
-```javascript
-var rsize = require('img-resize-cli');
+Options
+	--porcent image porcentage resize
+	--width new image width, (numbers or auto)
+	--height new image height, (numbers or auto)
+	--algo resize algorithm, default: bilinear
+	algorithms: bilinear | neighbor | bicubic | hermite | bezier
 
-// width porcent
-rsize(src,dest,{
-	porcent:'50%'
-},function(err,data){
-
-});
-
-// width dimensions
-rsize(src,dest,{
-	width:100,
-	height:100, 
-},function(err,data){
-
-});
-
-// full options 
-rsize(src,dest,{
-	width:'50%',
-	height:'auto', 
-	alog:'bicubic', 
-},function(err,data){
-
-});
+Examples
+	rsize "**/*.png" "destFolder/" --porcent 50
+	rsize "**/*.png" "destFolder/" --width 100
+	rsize "**/*.png" "destFolder/" --width 100 --height 100
+	rsize "**/*.png" "destFolder/" --width 100 --height auto
+	rsize "**/*.png" "destFolder/" --porcent 25 --algo bicubic
 ```
 
 ## Options
@@ -79,30 +68,40 @@ algorithms: bilinear | neighbor | bicubic | hermite | bezier</td>
 </tr>
 </table>
 
-
-## CLI
-
-```
-npm install img-resize-cli -g
-```
+## Node Usage
 
 ```
-Usage
-	$ rsize <glob>
+rsize(src,dest,options)
+```
 
-Options
-	--porcent image porcentage resize
-	--width new image width, (numbers or auto)
-	--height new image height, (numbers or auto)
-	--algo resize algorithm, default: bilinear
-	algorithms: bilinear | neighbor | bicubic | hermite | bezier
+## Example 
 
-Examples
-	rsize "**/*.png" "destFolder/" --porcent 50
-	rsize "**/*.png" "destFolder/" --width 100
-	rsize "**/*.png" "destFolder/" --width 100 --height 100
-	rsize "**/*.png" "destFolder/" --width 100 --height auto
-	rsize "**/*.png" "destFolder/" --porcent 25 --algo bicubic
+```javascript
+var rsize = require('img-resize-cli');
+
+// width porcent
+rsize(src,dest,{
+	porcent:'50%'
+},function(err,data){
+
+});
+
+// width dimensions
+rsize(src,dest,{
+	width:100,
+	height:100, 
+},function(err,data){
+
+});
+
+// full options 
+rsize(src,dest,{
+	width:'50%',
+	height:'auto', 
+	alog:'bicubic', 
+},function(err,data){
+
+});
 ```
 
 ## License
