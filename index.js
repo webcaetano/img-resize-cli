@@ -85,7 +85,7 @@ var self = function(src, dest, options, done){
 
 				if(dest){
 					var newName = path.format({
-						dir:dest+'/'+data.dir,
+						dir:path.join(dest,data.dir),
 						name:data.name,
 						ext:data.ext,
 					});

@@ -11,14 +11,14 @@ var self = require('./');
 test.cb('should resize image with default values',function(t){
 	var src = './test/wizz/*.png';
 	var dest = './test/dist/test1'
-	var inputFiles = glob.sync(src);
+	var inputFiles = glob.sync(src,{nodir:true});
 	var numOfInput = inputFiles.length;
 	var inputImageSize = sizeOf(inputFiles[0]);
 
 	del.sync(dest);
 
 	self(src,dest,null,function(err,data){
-		var outputFiles = glob.sync(dest+'/*');
+		var outputFiles = glob.sync(dest+'/**',{nodir:true});
 		var numOutput = outputFiles.length;
 
 		t.falsy(err);
@@ -31,7 +31,7 @@ test.cb('should resize image with default values',function(t){
 test.cb('should resize image with percent option',function(t){
 	var src = './test/wizz/*.png';
 	var dest = './test/dist/test2'
-	var inputFiles = glob.sync(src);
+	var inputFiles = glob.sync(src,{nodir:true});
 	var numOfInput = inputFiles.length;
 	var inputImageSize = sizeOf(inputFiles[0]);
 
@@ -40,7 +40,7 @@ test.cb('should resize image with percent option',function(t){
 	self(src,dest,{
 		porcent:'50%'
 	},function(err,data){
-		var outputFiles = glob.sync(dest+'/*');
+		var outputFiles = glob.sync(dest+'/**',{nodir:true});
 		var numOutput = outputFiles.length;
 		var outputImageSize = sizeOf(outputFiles[0]);
 
@@ -56,7 +56,7 @@ test.cb('should resize image with percent option',function(t){
 test.cb('should resize image with only one percent dimension',function(t){
 	var src = './test/wizz/*.png';
 	var dest = './test/dist/test3'
-	var inputFiles = glob.sync(src);
+	var inputFiles = glob.sync(src,{nodir:true});
 	var numOfInput = inputFiles.length;
 	var inputImageSize = sizeOf(inputFiles[0]);
 
@@ -65,7 +65,7 @@ test.cb('should resize image with only one percent dimension',function(t){
 	self(src,dest,{
 		width:'50%'
 	},function(err,data){
-		var outputFiles = glob.sync(dest+'/*');
+		var outputFiles = glob.sync(dest+'/**',{nodir:true});
 		var numOutput = outputFiles.length;
 		var outputImageSize = sizeOf(outputFiles[0]);
 
@@ -81,7 +81,7 @@ test.cb('should resize image with only one percent dimension',function(t){
 test.cb('should resize image with both px dimensions',function(t){
 	var src = './test/wizz/*.png';
 	var dest = './test/dist/test4'
-	var inputFiles = glob.sync(src);
+	var inputFiles = glob.sync(src,{nodir:true});
 	var numOfInput = inputFiles.length;
 	var inputImageSize = sizeOf(inputFiles[0]);
 
@@ -91,7 +91,7 @@ test.cb('should resize image with both px dimensions',function(t){
 		width:100,
 		height:100,
 	},function(err,data){
-		var outputFiles = glob.sync(dest+'/*');
+		var outputFiles = glob.sync(dest+'/**',{nodir:true});
 		var numOutput = outputFiles.length;
 		var outputImageSize = sizeOf(outputFiles[0]);
 
@@ -107,7 +107,7 @@ test.cb('should resize image with both px dimensions',function(t){
 test.cb('should resize image with both dimensions but one is percent',function(t){
 	var src = './test/wizz/*.png';
 	var dest = './test/dist/test5'
-	var inputFiles = glob.sync(src);
+	var inputFiles = glob.sync(src,{nodir:true});
 	var numOfInput = inputFiles.length;
 	var inputImageSize = sizeOf(inputFiles[0]);
 
@@ -117,7 +117,7 @@ test.cb('should resize image with both dimensions but one is percent',function(t
 		width:'50%',
 		height:100,
 	},function(err,data){
-		var outputFiles = glob.sync(dest+'/*');
+		var outputFiles = glob.sync(dest+'/**',{nodir:true});
 		var numOutput = outputFiles.length;
 		var outputImageSize = sizeOf(outputFiles[0]);
 
@@ -133,7 +133,7 @@ test.cb('should resize image with both dimensions but one is percent',function(t
 test.cb('should resize image with both dimensions but one auto',function(t){
 	var src = './test/wizz/*.png';
 	var dest = './test/dist/test6'
-	var inputFiles = glob.sync(src);
+	var inputFiles = glob.sync(src,{nodir:true});
 	var numOfInput = inputFiles.length;
 	var inputImageSize = sizeOf(inputFiles[0]);
 
@@ -143,7 +143,7 @@ test.cb('should resize image with both dimensions but one auto',function(t){
 		width:'50%',
 		height:'auto',
 	},function(err,data){
-		var outputFiles = glob.sync(dest+'/*');
+		var outputFiles = glob.sync(dest+'/**',{nodir:true});
 		var numOutput = outputFiles.length;
 		var outputImageSize = sizeOf(outputFiles[0]);
 
@@ -159,7 +159,7 @@ test.cb('should resize image with both dimensions but one auto',function(t){
 test.cb('should resize image with percent option as number',function(t){
 	var src = './test/wizz/*.png';
 	var dest = './test/dist/test7'
-	var inputFiles = glob.sync(src);
+	var inputFiles = glob.sync(src,{nodir:true});
 	var numOfInput = inputFiles.length;
 	var inputImageSize = sizeOf(inputFiles[0]);
 
@@ -168,7 +168,7 @@ test.cb('should resize image with percent option as number',function(t){
 	self(src,dest,{
 		porcent:50
 	},function(err,data){
-		var outputFiles = glob.sync(dest+'/*');
+		var outputFiles = glob.sync(dest+'/**',{nodir:true});
 		var numOutput = outputFiles.length;
 		var outputImageSize = sizeOf(outputFiles[0]);
 
@@ -184,7 +184,7 @@ test.cb('should resize image with percent option as number',function(t){
 test.cb('should resize image with percent option as string without %',function(t){
 	var src = './test/wizz/*.png';
 	var dest = './test/dist/test8'
-	var inputFiles = glob.sync(src);
+	var inputFiles = glob.sync(src,{nodir:true});
 	var numOfInput = inputFiles.length;
 	var inputImageSize = sizeOf(inputFiles[0]);
 
@@ -193,7 +193,7 @@ test.cb('should resize image with percent option as string without %',function(t
 	self(src,dest,{
 		porcent:'50'
 	},function(err,data){
-		var outputFiles = glob.sync(dest+'/*');
+		var outputFiles = glob.sync(dest+'/**',{nodir:true});
 		var numOutput = outputFiles.length;
 		var outputImageSize = sizeOf(outputFiles[0]);
 
@@ -209,7 +209,7 @@ test.cb('should resize image with percent option as string without %',function(t
 test.cb('should resize image with percent and algo',function(t){
 	var src = './test/wizz/*.png';
 	var dest = './test/dist/test9'
-	var inputFiles = glob.sync(src);
+	var inputFiles = glob.sync(src,{nodir:true});
 	var numOfInput = inputFiles.length;
 	var inputImageSize = sizeOf(inputFiles[0]);
 
@@ -219,7 +219,7 @@ test.cb('should resize image with percent and algo',function(t){
 		porcent:'50%',
 		algo:'bicubic',
 	},function(err,data){
-		var outputFiles = glob.sync(dest+'/*');
+		var outputFiles = glob.sync(dest+'/**',{nodir:true});
 		var numOutput = outputFiles.length;
 		var outputImageSize = sizeOf(outputFiles[0]);
 
