@@ -134,7 +134,7 @@ var self = function(src, dest, options, done){
 				})
 			})
 
-			async.parallel(run,callback);
+			async.parallelLimit(run,5,callback);
 		}]
 	},function(err,results){
 		if(done) done(err,results);
